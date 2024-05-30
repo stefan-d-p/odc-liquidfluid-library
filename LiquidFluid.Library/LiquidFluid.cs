@@ -8,7 +8,14 @@ public class LiquidFluid : ILiquidFluid
 {
     private static readonly FluidParser _fluidParser = new FluidParser();
     
-    public async Task<string> RenderTemplate(string template, string data)
+    /// <summary>
+    /// Renders a document
+    /// </summary>
+    /// <param name="template">Liquid template</param>
+    /// <param name="data">JSON data</param>
+    /// <returns>Rendered result</returns>
+    /// <exception cref="ArgumentException"></exception>
+    public string RenderTemplate(string template, string data)
     {
         if(string.IsNullOrEmpty(template) || string.IsNullOrEmpty(data))
             throw new ArgumentException("Template and data are required");
@@ -16,6 +23,6 @@ public class LiquidFluid : ILiquidFluid
         IFluidTemplate parsedTemplate = _fluidParser.Parse(template);
         var jsonDocument = JsonSerializer.Deserialize<ExpandoObject>(data);
         var context = new TemplateContext(jsonDocument);
-        return await parsedTemplate.RenderAsync(context);
+        return parsedTemplate.RenderAsync(context).Result;
     }
 }

@@ -3,7 +3,7 @@ using OutSystems.ExternalLibraries.SDK;
 namespace Without.Systems.LiquidFluid
 {
     [OSInterface(
-        Name = "Fluid Template Engine",
+        Name = "LiquidFluid",
         Description = "Fluid Template engine is based on the Liquid Template Language created by Shopify. Fluid is a native C# open-source implementation of the Liquid Template Language developed by Sebastien Ros",
         IconResourceName = "Without.Systems.LiquidFluid.Resources.FluidCore.png")]
     public interface ILiquidFluid
@@ -14,7 +14,7 @@ namespace Without.Systems.LiquidFluid
             ReturnName = "result",
             ReturnDescription = "Rendered result",
             IconResourceName = "Without.Systems.LiquidFluid.Resources.FluidCore.png")]
-        Task<string> RenderTemplate(
+        string RenderTemplate(
             [OSParameter(
                 Description = "Liquid template",
                 DataType = OSDataType.Text)] string template,
