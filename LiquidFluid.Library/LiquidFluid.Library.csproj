@@ -9,13 +9,17 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Fluid.Core" Version="2.11.1" />
+        <PackageReference Include="Fluid.Core" Version="2.12.0" />
         <PackageReference Include="OutSystems.ExternalLibraries.SDK" Version="1.5.0" />
     </ItemGroup>
 
     <ItemGroup>
       <None Remove="Resources\FluidCore.png" />
-      <EmbeddedResource Include="Resources\FluidCore.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Resources\Liquid.png" />
+      <EmbeddedResource Include="Resources\Liquid.png" />
     </ItemGroup>
 
 </Project>
