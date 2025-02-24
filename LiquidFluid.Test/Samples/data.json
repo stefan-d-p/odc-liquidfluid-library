@@ -1,0 +1,8 @@
+﻿{
+  "name": "Apple iPhone",
+  "price":600.8,
+  "specs": {
+    "processor": "Dragon",
+    "color": "yellow"
+  }
+}

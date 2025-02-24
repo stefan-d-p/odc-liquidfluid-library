@@ -1,5 +1,3 @@
-using System.Text.Json;
-
 namespace Without.Systems.LiquidFluid.Test;
 
 public class Tests
@@ -20,6 +18,14 @@ public class Tests
         
         string result = _actions.RenderTemplate(template, model);
         Assert.That(result, Is.EqualTo(expectedResult));
+    }
+
+    [Test]
+    public void Nested_Product_Data()
+    {
+        string model = File.ReadAllText(@"Samples\data.json");
+        string template = @"<span>{{specs.color}}</span>";
+        string result = _actions.RenderTemplate(template, model);
     }
 
     

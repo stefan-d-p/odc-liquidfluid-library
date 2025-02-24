@@ -24,4 +24,10 @@
         <ProjectReference Include="../LiquidFluid.Library/LiquidFluid.Library.csproj"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="Samples\data.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>

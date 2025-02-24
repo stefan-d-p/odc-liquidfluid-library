@@ -1,6 +1,9 @@
 ﻿using System.Dynamic;
 using System.Text.Json;
+using System.Text.Json.Nodes;
 using Fluid;
+using Fluid.Parser;
+using Fluid.Values;
 
 namespace Without.Systems.LiquidFluid;
 
@@ -21,7 +24,8 @@ public class LiquidFluid : ILiquidFluid
             throw new ArgumentException("Template and data are required");
 
         IFluidTemplate parsedTemplate = _fluidParser.Parse(template);
-        var jsonDocument = JsonSerializer.Deserialize<ExpandoObject>(data);
+
+        var jsonDocument = JsonNode.Parse(data);
         var context = new TemplateContext(jsonDocument);
         return parsedTemplate.RenderAsync(context).Result;
     }
