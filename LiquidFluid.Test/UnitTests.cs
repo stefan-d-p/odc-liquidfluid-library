@@ -28,5 +28,13 @@ public class Tests
         string result = _actions.RenderTemplate(template, model);
     }
 
+    [Test]
+    public void Complex()
+    {
+        string template = File.ReadAllText(@"Samples\agent-pipeline.liquid");
+        string model = File.ReadAllText(@"Samples\agent-pipeline.json");
+        string result = _actions.RenderTemplate(template, model);
+    }
+
     
 }

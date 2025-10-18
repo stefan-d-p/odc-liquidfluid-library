@@ -1,0 +1,165 @@
+{
+  "model": "{{ model }}",
+  "messages": [
+    {
+      "role": "system",
+      "content": {{ system_prompt | json }}
+
+    },
+    {
+      "role": "user",
+      "content": "{{ user_prompt }}
+    }
+  ],
+  "response_format": {
+    "type": "json_schema",
+    "json_schema": {
+      "name": "agent_pipeline_schema",
+      "schema": {
+        "description": "A JSON schema describing an agent pipeline for expense receipt processing and accounting booking.",
+        "type": "object",
+        "properties": {
+          "pipeline_overview": {
+            "type": "object",
+            "description": "High-level details of the agent pipeline.",
+            "properties": {
+              "structure": {
+                "type": "string",
+                "description": "The pipeline's execution structure (e.g., Sequential)."
+              },
+              "assumptions": {
+                "type": "array",
+                "description": "Prerequisites and assumptions for the pipeline to function.",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "description": {
+                "type": "string",
+                "description": "A summary of what the pipeline automates."
+              },
+              "data_flow": {
+                "type": "array",
+                "description": "Step-by-step flow of data through the pipeline.",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "structure",
+              "assumptions",
+              "description",
+              "data_flow"
+            ]
+          },
+          "agents": {
+            "type": "array",
+            "description": "The sequence of agents that make up the pipeline.",
+            "items": {
+              "$ref": "#/$defs/agent"
+            }
+          },
+          "pipeline_visualization": {
+            "type": "object",
+            "description": "Visual representation of the pipeline.",
+            "properties": {
+              "mermaid_code": {
+                "type": "string",
+                "description": "A Mermaid graph definition string."
+              }
+            }
+          },
+          "key_design_choices": {
+            "type": "array",
+            "description": "Rationale behind the pipeline's structure.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "next_steps_for_implementation": {
+            "type": "array",
+            "description": "Actionable next steps to build the pipeline.",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "pipeline_overview",
+          "agents"
+        ],
+        "$defs": {
+          "agent": {
+            "type": "object",
+            "description": "Defines a single agent in the pipeline.",
+            "properties": {
+              "title": {
+                "type": "string",
+                "description": "The name and role of the agent (e.g., 'Agent 1: Receipt OCR Processor')."
+              },
+              "description": {
+                "type": "string",
+                "description": "A detailed description of the agent's function and persona."
+              },
+              "required_tools": {
+                "type": "array",
+                "description": "A list of tools the agent must use.",
+                "items": {
+                  "$ref": "#/$defs/tool"
+                }
+              },
+              "example_system_prompt": {
+                "type": "string",
+                "description": "The full system prompt (persona, instructions, constraints) for the agent."
+              },
+              "guidance_for_json_output": {
+                "type": "object",
+                "description": "A JSON schema that defines the structure of this agent's final output.",
+                "additionalProperties": true
+              },
+              "required_grounding_data": {
+                "type": "array",
+                "description": "A list of required external data sources or knowledge bases for the agent.",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "title",
+              "description",
+              "required_tools",
+              "example_system_prompt",
+              "guidance_for_json_output",
+              "required_grounding_data"
+            ]
+          },
+          "tool": {
+            "type": "object",
+            "description": "Defines a tool that an agent can use.",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The name of the tool (e.g., 'OCRScanner')."
+              },
+              "description": {
+                "type": "string",
+                "description": "What the tool does."
+              },
+              "required_data_output": {
+                "type": "string",
+                "description": "An example (as a string) of the JSON output this tool is expected to produce."
+              }
+            },
+            "required": [
+              "name",
+              "description",
+              "required_data_output"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
