@@ -1,17 +1,12 @@
-﻿using System.Dynamic;
-using System.Text.Encodings.Web;
-using System.Text.Json;
-using System.Text.Json.Nodes;
+﻿using System.Text.Json.Nodes;
 using Fluid;
-using Fluid.Parser;
-using Fluid.Values;
 using Without.Systems.LiquidFluid.Filter;
 
 namespace Without.Systems.LiquidFluid;
 
 public class LiquidFluid : ILiquidFluid
 {
-    private static readonly FluidParser _fluidParser = new FluidParser();
+    private static readonly FluidParser FluidParser = new FluidParser();
     
     /// <summary>
     /// Renders a document
@@ -25,7 +20,7 @@ public class LiquidFluid : ILiquidFluid
         if(string.IsNullOrEmpty(template) || string.IsNullOrEmpty(data))
             throw new ArgumentException("Template and data are required");
 
-        IFluidTemplate parsedTemplate = _fluidParser.Parse(template);
+        IFluidTemplate parsedTemplate = FluidParser.Parse(template);
 
         TemplateOptions options = new TemplateOptions();
         options.Filters.WithCustomFilters();
